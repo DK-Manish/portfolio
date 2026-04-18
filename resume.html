@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Manish Dhanabalakrishnan — Resume</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #eef2f7;
+      color: #1a2332;
+      line-height: 1.6;
+    }
+
+    /* ── PAGE WRAPPER ── */
+    .page {
+      max-width: 1050px;
+      margin: 2.5rem auto;
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+      display: grid;
+      grid-template-columns: 290px 1fr;
+      grid-template-rows: auto 1fr;
+    }
+
+    /* ── HEADER (full width) ── */
+    .header {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, #0f2744 0%, #1e3a5f 55%, #0078d4 100%);
+      padding: 2.5rem 2.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* decorative circles */
+    .header::before,
+    .header::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.07;
+      background: #fff;
+    }
+    .header::before { width: 320px; height: 320px; top: -120px; right: -60px; }
+    .header::after  { width: 180px; height: 180px; bottom: -80px; right: 220px; }
+
+    .header-avatar {
+      width: 88px; height: 88px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      border: 3px solid rgba(255,255,255,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: #fff;
+      font-weight: 700;
+      flex-shrink: 0;
+      z-index: 1;
+    }
+
+    .header-text { z-index: 1; }
+
+    .header-text h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.2rem;
+    }
+
+    .header-text .title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #7dd3fc;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.75rem;
+    }
+
+    .header-contacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+    }
+
+    .contact-item:hover { color: #fff; }
+
+    .contact-icon {
+      width: 16px; height: 16px;
+      opacity: 0.7;
+      flex-shrink: 0;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      background: #f0f5fb;
+      border-right: 1px solid #dde5ef;
+      padding: 2rem 1.5rem;
+    }
+
+    .sidebar-section { margin-bottom: 2rem; }
+
+    .sidebar-section h3 {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 800;
+      color: #0078d4;
+      margin-bottom: 0.9rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid #0078d422;
+    }
+
+    /* Skill groups */
+    .skill-group { margin-bottom: 1rem; }
+
+    .skill-group-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #1e3a5f;
+      margin-bottom: 0.4rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+
+    .skill-tag {
+      font-size: 0.68rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 600;
+      background: #e0edf8;
+      color: #1e4976;
+      border: 1px solid #c3d9ee;
+    }
+
+    .skill-tag.azure  { background: #dbeafe; color: #1e40af; border-color: #bfdbfe; }
+    .skill-tag.green  { background: #dcfce7; color: #166534; border-color: #bbf7d0; }
+    .skill-tag.purple { background: #ede9fe; color: #5b21b6; border-color: #ddd6fe; }
+    .skill-tag.gray   { background: #f1f5f9; color: #475569; border-color: #e2e8f0; }
+    .skill-tag.orange { background: #ffedd5; color: #9a3412; border-color: #fed7aa; }
+
+    /* Certs */
+    .cert-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .cert-icon {
+      width: 28px; height: 28px;
+      border-radius: 6px;
+      background: #0078d4;
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .cert-icon.db { background: #e25a1c; }
+
+    .cert-item p {
+      font-size: 0.78rem;
+      color: #334155;
+      line-height: 1.4;
+    }
+
+    /* Education */
+    .edu-item { margin-bottom: 1rem; }
+
+    .edu-item .degree {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #1e3a5f;
+      line-height: 1.4;
+    }
+
+    .edu-item .institution {
+      font-size: 0.75rem;
+      color: #475569;
+      margin-top: 0.1rem;
+    }
+
+    .edu-item .grad {
+      font-size: 0.73rem;
+      color: #64748b;
+      margin-top: 0.15rem;
+    }
+
+    /* GitHub CTA */
+    .github-cta {
+      background: linear-gradient(135deg, #1e3a5f, #0078d4);
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+      text-align: center;
+    }
+
+    .github-cta p {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+
+    .github-cta a {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .github-cta a:hover { background: rgba(255,255,255,0.25); }
+
+    /* ── MAIN CONTENT ── */
+    .main {
+      padding: 2rem 2.25rem;
+    }
+
+    /* Summary */
+    .summary-text {
+      font-size: 0.875rem;
+      color: #334155;
+      line-height: 1.75;
+      padding: 1.1rem 1.25rem;
+      background: #f0f7ff;
+      border-left: 4px solid #0078d4;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 2rem;
+    }
+
+    /* Section headings */
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .section-heading h2 {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 800;
+      color: #0078d4;
+      white-space: nowrap;
+    }
+
+    .section-heading .sh-line {
+      flex: 1;
+      height: 1px;
+      background: #dde5ef;
+    }
+
+    /* Experience timeline */
+    .exp-block { margin-bottom: 2rem; }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .exp-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0f2744;
+    }
+
+    .exp-company {
+      font-size: 0.83rem;
+      color: #0078d4;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .exp-date {
+      font-size: 0.75rem;
+      color: #64748b;
+      font-weight: 600;
+      white-space: nowrap;
+      background: #e0edf8;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    /* Project sub-section */
+    .project-block {
+      margin-bottom: 1rem;
+      padding-left: 1rem;
+      border-left: 2px solid #c3d9ee;
+    }
+
+    .project-block:last-child { margin-bottom: 0; }
+
+    .project-name {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #1e3a5f;
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .project-name::before {
+      content: '';
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #0078d4;
+      flex-shrink: 0;
+    }
+
+    .project-block ul {
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .project-block ul li {
+      font-size: 0.82rem;
+      color: #334155;
+      padding: 0.2rem 0 0.2rem 1rem;
+      position: relative;
+      line-height: 1.55;
+    }
+
+    .project-block ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: #0078d4;
+      font-size: 0.7rem;
+      top: 0.25rem;
+    }
+
+    /* Intern experience (no projects) */
+    .exp-block > ul {
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .exp-block > ul li {
+      font-size: 0.82rem;
+      color: #334155;
+      padding: 0.2rem 0 0.2rem 1rem;
+      position: relative;
+      line-height: 1.55;
+    }
+
+    .exp-block > ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: #64748b;
+      font-size: 0.7rem;
+      top: 0.25rem;
+    }
+
+    /* print */
+    @media print {
+      body { background: #fff; }
+      .page {
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page { grid-template-columns: 1fr; }
+      .header { flex-direction: column; gap: 1rem; }
+      .sidebar { border-right: none; border-bottom: 1px solid #dde5ef; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ── HEADER ── -->
+  <header class="header">
+    <div class="header-avatar">MD</div>
+    <div class="header-text">
+      <h1>Manish Dhanabalakrishnan</h1>
+      <div class="title">Azure Integration Engineer</div>
+      <div class="header-contacts">
+        <a class="contact-item" href="mailto:11.manishd@gmail.com">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+          11.manishd@gmail.com
+        </a>
+        <span class="contact-item">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 11.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3 .82h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 8.09a16 16 0 0 0 5.91 5.91l1.45-1.16a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 15z"/></svg>
+          +44 7778881893
+        </span>
+        <span class="contact-item">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Slough, United Kingdom
+        </span>
+        <a class="contact-item" href="https://linkedin.com/in/manish-dhanabalakrishnan-12547516b" target="_blank">
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+
+    <!-- Skills -->
+    <div class="sidebar-section">
+      <h3>Skills</h3>
+
+      <div class="skill-group">
+        <div class="skill-group-label">Azure Integration Services</div>
+        <div class="skill-tags">
+          <span class="skill-tag azure">APIM</span>
+          <span class="skill-tag azure">Logic Apps</span>
+          <span class="skill-tag azure">Service Bus</span>
+          <span class="skill-tag azure">Azure Functions</span>
+          <span class="skill-tag azure">Event Grid</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">Cloud &amp; Data Platforms</div>
+        <div class="skill-tags">
+          <span class="skill-tag azure">Azure Data Factory</span>
+          <span class="skill-tag azure">Azure SQL</span>
+          <span class="skill-tag azure">Cosmos DB</span>
+          <span class="skill-tag azure">Databricks</span>
+          <span class="skill-tag azure">Delta Lake</span>
+          <span class="skill-tag azure">Dynamics 365</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">Integration &amp; Architecture</div>
+        <div class="skill-tags">
+          <span class="skill-tag purple">Event-driven</span>
+          <span class="skill-tag purple">Pub/Sub</span>
+          <span class="skill-tag purple">Hub-and-Spoke</span>
+          <span class="skill-tag purple">REST APIs</span>
+          <span class="skill-tag purple">Shopify API</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">Programming</div>
+        <div class="skill-tags">
+          <span class="skill-tag green">Python</span>
+          <span class="skill-tag green">SQL</span>
+          <span class="skill-tag green">PySpark</span>
+          <span class="skill-tag green">Pandas</span>
+          <span class="skill-tag green">NumPy</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">Security</div>
+        <div class="skill-tags">
+          <span class="skill-tag orange">JWT Auth</span>
+          <span class="skill-tag orange">RBAC</span>
+          <span class="skill-tag orange">Key Vault</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">Data Processing</div>
+        <div class="skill-tags">
+          <span class="skill-tag gray">Liquid Templates</span>
+          <span class="skill-tag gray">Data Mapping</span>
+          <span class="skill-tag gray">Medallion Arch.</span>
+          <span class="skill-tag gray">ADF Pipelines</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">DevOps &amp; Tools</div>
+        <div class="skill-tags">
+          <span class="skill-tag gray">Azure DevOps</span>
+          <span class="skill-tag gray">Git</span>
+          <span class="skill-tag gray">Postman</span>
+          <span class="skill-tag gray">VS Code</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Certifications -->
+    <div class="sidebar-section">
+      <h3>Certifications</h3>
+
+      <div class="cert-item">
+        <div class="cert-icon">AZ</div>
+        <p>Microsoft Certified: Azure Fundamentals</p>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">AZ</div>
+        <p>Microsoft Certified: Azure Data Engineer Associate</p>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">AZ</div>
+        <p>Microsoft Certified: Azure AI Fundamentals</p>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon db">DB</div>
+        <p>Databricks Certified: Data Engineer Associate</p>
+      </div>
+    </div>
+
+    <!-- Education -->
+    <div class="sidebar-section">
+      <h3>Education</h3>
+
+      <div class="edu-item">
+        <div class="degree">MSc Information Systems and Technology</div>
+        <div class="institution">Coventry University, UK</div>
+        <div class="grad">Graduated: November 2022</div>
+      </div>
+      <div class="edu-item">
+        <div class="degree">BE Computer Science</div>
+        <div class="institution">Sri Krishna College, India</div>
+        <div class="grad">Graduated: April 2020</div>
+      </div>
+    </div>
+
+    <!-- GitHub CTA -->
+    <div class="github-cta">
+      <p>See hands-on Python, API &amp; ML projects on GitHub</p>
+      <a href="https://github.com/DK-Manish?tab=repositories" target="_blank">View GitHub Profile ↗</a>
+    </div>
+
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <main class="main">
+
+    <!-- Summary -->
+    <div class="section-heading">
+      <h2>Summary</h2>
+      <div class="sh-line"></div>
+    </div>
+
+    <p class="summary-text">
+      Azure Integration Engineer with 4+ years of experience designing and delivering integration solutions on Microsoft Azure, specialising in scalable system-to-system integrations using API-based, event-driven, and message-based architectures. Strong hands-on experience with Azure Integration Services — including API Management, messaging, and workflow orchestration — along with integrating enterprise platforms such as Dynamics 365 with external systems. Proficient in developing and managing APIs to enable reliable communication across distributed systems and building secure, high-performance integration workflows. Good working knowledge of Python, including developing Azure Functions to support integration logic. Currently expanding skills in Applied AI and Machine Learning through hands-on projects and practical implementations.
+    </p>
+
+    <!-- Experience -->
+    <div class="section-heading">
+      <h2>Work Experience</h2>
+      <div class="sh-line"></div>
+    </div>
+
+    <!-- Job 1 -->
+    <div class="exp-block">
+      <div class="exp-header">
+        <div class="exp-title">Azure Integration Engineer</div>
+        <span class="exp-date">June 2023 – Present</span>
+      </div>
+      <div class="exp-company">Codester LTD &nbsp;·&nbsp; Slough, United Kingdom</div>
+
+      <div class="project-block">
+        <div class="project-name">Project 1 — ESHOP Integration &nbsp;|&nbsp; Client: Bucher Municipal</div>
+        <ul>
+          <li>Designed and exposed API abstractions over Dynamics 365 Commerce Scale Unit (CSU) using Azure API Management, enabling scalable and performant frontend integrations.</li>
+          <li>Built real-time, API-driven integration layer supporting end-to-end sales order workflows including product search, cart management, checkout, and order creation.</li>
+          <li>Implemented JWT-based authentication and secure access control, including validation of user claims and handling of expired and unauthorised requests.</li>
+          <li>Transformed and structured complex CSU responses using Liquid templates (data normalisation and re-indexing), delivering frontend-optimised payloads.</li>
+          <li>Improved system performance and reliability by introducing a centralised API layer, aggregating backend data, and implementing a Logic App-based warm-up mechanism to prevent cold starts.</li>
+        </ul>
+      </div>
+
+      <div class="project-block">
+        <div class="project-name">Project 2 — D365 Integration &nbsp;|&nbsp; Client: Life Style Sports</div>
+        <ul>
+          <li>Designed and implemented end-to-end system integrations between Shopify, D365 F&amp;O, and warehouse systems using Azure Data Factory, Logic Apps, Service Bus, Azure Functions, and Python-based integration logic.</li>
+          <li>Built event-driven, message-based order processing workflows using Azure Service Bus and Logic Apps to enable reliable, asynchronous communication across distributed systems.</li>
+          <li>Developed and consumed REST APIs for Shopify integration, integrating with downstream systems including Cosmos DB.</li>
+          <li>Designed and implemented D365 Sales Order integrations, handling complex payload construction, SKU mapping, fulfilment rules, and business validations.</li>
+          <li>Ensured reliable data exchange and system resilience by implementing incremental data synchronisation (watermarking), retry mechanisms, fault-tolerant workflows, structured error handling, and supporting cross-functional troubleshooting.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Job 2 -->
+    <div class="exp-block">
+      <div class="exp-header">
+        <div class="exp-title">Data Engineer Intern</div>
+        <span class="exp-date">Apr 2020 – Aug 2021</span>
+      </div>
+      <div class="exp-company">Levitate Consulting &nbsp;·&nbsp; Chennai, India</div>
+      <ul>
+        <li>Supported monitoring and basic troubleshooting of data pipelines in Azure Data Factory and Databricks.</li>
+        <li>Assisted in testing data workflows and validating outputs to ensure data accuracy and reliability.</li>
+        <li>Performed small enhancements and ad-hoc updates to pipelines and PySpark scripts under guidance.</li>
+      </ul>
+    </div>
+
+  </main>
+
+</div><!-- /.page -->
+
+</body>
+</html>
